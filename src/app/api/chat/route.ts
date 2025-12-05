@@ -42,7 +42,6 @@ const SYSTEM_PROMPT = `
           query: z.string().describe('The PostgreSQL SELECT query to execute'),
         }),
         execute: async ({ query }) => {
-          console.log("AI Generated SQL:", query);
           try {
             const result = await prisma.$queryRawUnsafe(query);
             return JSON.stringify(result, (key, value) => 
@@ -55,8 +54,7 @@ const SYSTEM_PROMPT = `
         },
       }),
     },
-    // maxSteps: 5, <--- This was causing the error
-    stopWhen: stepCountIs(6), // <--- This is the correct property for your version
+    stopWhen: stepCountIs(6),
   });
 
   return result.toUIMessageStreamResponse();

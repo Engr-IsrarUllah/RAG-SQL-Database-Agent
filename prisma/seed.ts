@@ -6,9 +6,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Start seeding...");
 
-  // 1. CLEAR DATA AND RESET ID COUNTER
-  // "TRUNCATE" wipes the table and "RESTART IDENTITY" sets ID back to 1.
-  // We use $executeRawUnsafe because Prisma doesn't have a native "Reset ID" command.
   await prisma.$executeRawUnsafe(
     'TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;'
   );
@@ -16,7 +13,6 @@ async function main() {
   // 2. Create new rich data
   await prisma.user.createMany({
     data: [
-      // --- ISLAMABAD USERS ---
       {
         name: "Ali Khan",
         email: "ali.k@tech.pk",
@@ -53,7 +49,6 @@ async function main() {
         city: "Islamabad",
       },
 
-      // --- LAHORE USERS ---
       {
         name: "Hamza Yasin",
         email: "hamza.y@soft.pk",
@@ -97,7 +92,6 @@ async function main() {
         city: "Lahore",
       },
 
-      // --- MULTAN USERS ---
       {
         name: "Kashif Mehmood",
         email: "kashif.m@data.pk",
@@ -127,7 +121,6 @@ async function main() {
         city: "Multan",
       },
 
-      // --- KARACHI USERS ---
       {
         name: "Fahad Mustafa",
         email: "fahad.m@media.pk",
